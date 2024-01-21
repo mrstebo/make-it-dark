@@ -1,9 +1,11 @@
 <script>
-  export let data;
+	import GameGrid from './GameGrid.svelte';
+
+	export let data;
 </script>
 
 <main>
-  <h1>Game</h1>
-  <p>Level: {data.level}</p>
-  <pre>{JSON.stringify(data.levelData, null, 2)}</pre>
+	<h1>Game</h1>
+	<p>Level: {data.level}</p>
+	<GameGrid data={data.levelData} />
 </main>
