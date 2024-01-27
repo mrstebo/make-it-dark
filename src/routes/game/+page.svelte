@@ -1,5 +1,5 @@
 <script>
-	import GameGrid from './GameGrid.svelte';
+	import Game from '$lib/components/Game.svelte';
 
 	export let data;
 </script>
@@ -7,5 +7,5 @@
 <main>
 	<h1>Game</h1>
 	<p>Level: {data.level}</p>
-	<GameGrid data={data.levelData} />
+	<Game data={data.levelData} />
 </main>
