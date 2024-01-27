@@ -1,13 +1,12 @@
 <script>
-	/** @type {number[][]}*/
-	export let data;
+	import { fetchLevel } from "$lib/functions/fetch-level";
+	import GameGrid from "./GameGrid.svelte";
 
-	export let onReset = () => {};
+	let level = 1;
+	let levelData = fetchLevel(level);
+	let moves = 0;
 
-	let blockSize = 100;
-	let blockGap = 5;
-	let columns = data[0].length;
-	let rows = data.length;
+	$: data = [...levelData];
 </script>
 
 <div
@@ -19,27 +18,37 @@
 >
 	<div
 		style="
-		display: grid;
-		grid-template-columns: repeat({columns}, {blockSize}px);
-		grid-template-rows: repeat({rows}, {blockSize}px);
-		grid-gap: {blockGap}px;
-		width: {(columns * blockSize) + (columns * blockGap) - blockGap}px;
-		background-color: #fff;
-		margin: 20px;
-	"
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+			margin: 20px;
+			background-color: #40a;
+			border: 2px solid #306;
+			color: #fff;
+		"
 	>
-		{#each data as row}
-			{#each row as cell}
-				<div 
-					style="
-						background-color: {cell === 1 ? '#f00' : '#000'};
-						width: {blockSize}px;
-						height: {blockSize}px;
-					"
-				/>
-			{/each}
-		{/each}
+		<h1>Make It Dark</h1>
+		<h2>Level: {level}</h2>
 	</div>
+	<div
+		style="
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+			margin: 20px;
+			background-color: #40a;
+			border: 2px solid #306;
+			color: #fff;
+		"
+	>
+		<h2>Moves: {moves}</h2>
+	</div>
+	<GameGrid data={data} onChange={(location) => {
+		moves++;
+		data[location.x][location.y] = data[location.x][location.y] === 1 ? 0 : 1;
+	}} />
 	<div
 		style="
 			display: flex;
@@ -55,7 +64,10 @@
 				cursor: pointer;
 				width: 100%;
 			"
-			on:click={onReset}
+			on:click={() => {
+				moves = 0;
+				data = levelData;
+			}}
 		>
 			Reset
 		</button>
