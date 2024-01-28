@@ -5,13 +5,17 @@ export abstract class Level {
     public readonly rows: number,
     public readonly columns: number,
     private readonly tollerence: number,
-  ) {}
+    private readonly rng: () => number = Math.random,
+  ) {
+  }
 
   setupLevel(): boolean[][] {
     if (!this.levelData) {
-      this.levelData = new Array(this.rows).fill(
-        new Array(this.columns).fill(Math.random() > this.tollerence),
-      );
+        this.levelData = Array.from({ length: this.rows }, () => {
+          return Array.from({ length: this.columns }, () => {
+            return this.rng() < this.tollerence;
+          });
+        });
     }
 
     return this.levelData;
