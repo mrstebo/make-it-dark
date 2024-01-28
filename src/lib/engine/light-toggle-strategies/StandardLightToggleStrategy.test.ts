@@ -1,7 +1,7 @@
-import { StandardLightToggleStrategy } from './StandardLightToggleStrategy';
-import { expect, test } from 'vitest';
+import { StandardLightToggleStrategy } from "./StandardLightToggleStrategy";
+import { expect, test } from "vitest";
 
-test('StandardLightToggleStrategy should toggle the selected light and adjacent lights', () => {
+test("StandardLightToggleStrategy should toggle the selected light and adjacent lights", () => {
   const strategy = new StandardLightToggleStrategy();
 
   // Create a 3x3 grid
@@ -14,7 +14,7 @@ test('StandardLightToggleStrategy should toggle the selected light and adjacent 
   const expectedGrid = [
     [false, true, false],
     [true, true, true],
-    [false, true, false]
+    [false, true, false],
   ];
 
   expect(grid).toEqual(expectedGrid);
