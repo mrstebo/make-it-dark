@@ -5,36 +5,41 @@ import { StandardLightToggleStrategy } from "./light-toggle-strategies/StandardL
 
 test("GameEngine should initialize and start a standard game", () => {
   const engine = new GameEngine(new LevelFactory(), new StandardLightToggleStrategy());
+
   engine.setLevel("standard");
   engine.startGame();
 
   const initialGridState = engine.__getCurrentGridState(); // Assuming getGridState is a method to get current grid state
   expect(initialGridState).toHaveLength(5);
-  expect(initialGridState.every((row) => row.every((light) => !light))).toBe(true);
+  expect(initialGridState.some((row) => row.some((light) => !light))).toBe(true);
+  expect(initialGridState.some((row) => row.some((light) => light))).toBe(true);
 });
 
 test("GameEngine should update grid state on making a move", () => {
   const engine = new GameEngine(new LevelFactory(), new StandardLightToggleStrategy());
-  engine.setLevel("standard");
+  
+  engine.setLevel("test");
   engine.startGame();
 
-  engine.makeMove(1, 1); // Making a move at the center
+  engine.makeMove(1, 1);
   const updatedGridState = engine.__getCurrentGridState();
 
-  // Define the expected grid state after the move
-  // (similar to the expected state in the light toggle strategy test)
-  // ...
-
-  expect(updatedGridState).toEqual(/* expected state */);
+  expect(updatedGridState).toEqual([
+    [false, true, false, false, false],
+    [true, false, true, false, false],
+    [false, false, false, false, false],
+    [false, false, false, false, false],
+    [false, false, false, false, true],
+  ]);
 });
 
 test("GameEngine should correctly identify the win condition", () => {
   const engine = new GameEngine(new LevelFactory(), new StandardLightToggleStrategy());
-  engine.setLevel("standard");
+
+  engine.setLevel("easyWin");
   engine.startGame();
 
-  // Simulate a series of moves that would lead to winning
-  // ...
+  engine.makeMove(3, 2);
 
   expect(engine.checkWinCondition()).toBe(true);
 });
