@@ -9,7 +9,7 @@ test("GameEngine should initialize and start a standard game", () => {
   engine.setLevel("standard");
   engine.startGame();
 
-  const initialGridState = engine.__getCurrentGridState(); // Assuming getGridState is a method to get current grid state
+  const initialGridState = engine.__getCurrentGridState();
   expect(initialGridState).toHaveLength(5);
   expect(initialGridState.some((row) => row.some((light) => !light))).toBe(true);
   expect(initialGridState.some((row) => row.some((light) => light))).toBe(true);

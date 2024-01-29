@@ -1,5 +1,5 @@
 import type { Level } from "./levels/Level";
-import { LevelFactory } from "./levels/LevelFactory";
+import { LevelFactory, type LevelType } from "./levels/LevelFactory";
 import type { ILightToggleStrategy } from "./light-toggle-strategies/ILightToggleStrategy";
 
 export class GameEngine {
@@ -11,7 +11,7 @@ export class GameEngine {
     private readonly lightToggleStrategy: ILightToggleStrategy,
   ) {}
 
-  setLevel(levelType: string): void {
+  setLevel(levelType: LevelType): void {
     this.level = this.levelFactory.createLevel(levelType);
   }
 
@@ -39,6 +39,11 @@ export class GameEngine {
     return this.grid.every((row) => row.every((light) => !light));
   }
 
+  /**
+   * !!! This method is only used for testing !!!
+   * 
+   * @returns The current grid state. This is only used for testing.
+   */
   __getCurrentGridState(): boolean[][] {
     return this.grid ?? [];
   }

@@ -1,18 +1,18 @@
 import { Level } from "./Level";
 import { StandardLevel } from "./StandardLevel";
-import { TestLevel } from "./TestLevel";
+import { TestLevel, type TestLevelType } from "./TestLevel";
+
+export type LevelType = "standard" & TestLevelType;
 
 export class LevelFactory {
-  createLevel(levelType: string): Level {
+  createLevel(levelType: LevelType): Level {
     switch (levelType) {
       case "standard":
         return new StandardLevel();
 
       case "test":
-        return new TestLevel("test");
-
       case "easyWin":
-        return new TestLevel("easyWin");
+        return new TestLevel(levelType);
 
       default:
         throw new Error(`Unknown level type: ${levelType}`);
