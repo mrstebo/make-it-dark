@@ -1,19 +1,20 @@
-export abstract class Level {
+export type LightSetterFunction = (row: number, col: number) => boolean;
+
+export class Level {
   private levelData?: boolean[][];
 
-  protected constructor(
+  constructor(
     public readonly rows: number,
     public readonly columns: number,
-    private readonly tollerence: number,
-    private readonly rng: () => number = Math.random,
+    private readonly lightSetter: LightSetterFunction = () => Math.random() < 0.8,
   ) {
   }
 
   setupLevel(): boolean[][] {
     if (!this.levelData) {
-        this.levelData = Array.from({ length: this.rows }, () => {
-          return Array.from({ length: this.columns }, () => {
-            return this.rng() < this.tollerence;
+        this.levelData = Array.from({ length: this.rows }, (_, row) => {
+          return Array.from({ length: this.columns }, (_, col) => {
+            return this.lightSetter(row, col)
           });
         });
     }

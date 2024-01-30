@@ -2,15 +2,38 @@ import type { ILightToggleStrategy } from "./ILightToggleStrategy";
 
 export class StandardLightToggleStrategy implements ILightToggleStrategy {
   toggle(grid: boolean[][], row: number, col: number): boolean[][] {
-    // Toggling the selected light
-    grid[row][col] = !grid[row][col];
+    if (grid.length === 0) {
+      throw new Error("Grid is empty");
+    }
 
-    // Toggling adjacent lights
-    if (row > 0) grid[row - 1][col] = !grid[row - 1][col]; // Above
-    if (row < grid.length - 1) grid[row + 1][col] = !grid[row + 1][col]; // Below
-    if (col > 0) grid[row][col - 1] = !grid[row][col - 1]; // Left
-    if (col < grid[0].length - 1) grid[row][col + 1] = !grid[row][col + 1]; // Right
+    if (row < 0 || row >= grid.length) {
+      throw new Error("Row is out of bounds");
+    }
 
-    return grid;
+    if (col < 0 || col >= grid[0].length) {
+      throw new Error("Column is out of bounds");
+    }
+
+    const newGrid = grid.map((row) => [...row]);
+
+    newGrid[row][col] = !newGrid[row][col];
+
+    if (row > 0) {
+      newGrid[row - 1][col] = !newGrid[row - 1][col];
+    }
+
+    if (row < newGrid.length - 1) {
+      newGrid[row + 1][col] = !newGrid[row + 1][col];
+    }
+
+    if (col > 0) {
+      newGrid[row][col - 1] = !newGrid[row][col - 1];
+    }
+
+    if (col < newGrid[0].length - 1) {
+      newGrid[row][col + 1] = !newGrid[row][col + 1];
+    }
+
+    return newGrid;
   }
 }

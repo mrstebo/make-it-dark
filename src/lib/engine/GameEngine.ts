@@ -1,23 +1,26 @@
 import type { Level } from "./levels/Level";
-import { LevelFactory, type LevelType } from "./levels/LevelFactory";
 import type { ILightToggleStrategy } from "./light-toggle-strategies/ILightToggleStrategy";
 
 export class GameEngine {
-  private level?: Level;
   private grid?: boolean[][];
+  private winConditionMet = false;
 
   constructor(
-    private readonly levelFactory: LevelFactory,
+    private readonly level: Level,
     private readonly lightToggleStrategy: ILightToggleStrategy,
   ) {}
 
-  setLevel(levelType: LevelType): void {
-    this.level = this.levelFactory.createLevel(levelType);
+  startGame(): void {
+    if (this.grid) {
+      throw new Error("Game has already started");
+    }
+
+    this.grid = this.level.setupLevel();
   }
 
-  startGame(): void {
-    if (!this.level) {
-      throw new Error("No level has been set yet");
+  restartGame(): void {
+    if (!this.grid) {
+      throw new Error("Game has not started yet");
     }
 
     this.grid = this.level.setupLevel();
@@ -28,6 +31,18 @@ export class GameEngine {
       throw new Error("Game has not started yet");
     }
 
+    if (this.winConditionMet) {
+      throw new Error("Game has already ended");
+    }
+
+    if (row < 0 || row >= this.grid.length) {
+      throw new Error("Row is out of bounds");
+    }
+
+    if (col < 0 || col >= this.grid[0].length) {
+      throw new Error("Column is out of bounds");
+    }
+
     this.grid = this.lightToggleStrategy.toggle(this.grid, row, col);
   }
 
@@ -36,7 +51,9 @@ export class GameEngine {
       throw new Error("Game has not started yet");
     }
 
-    return this.grid.every((row) => row.every((light) => !light));
+    this.winConditionMet = this.grid.every((row) => row.every((light) => !light));
+
+    return this.winConditionMet;
   }
 
   /**
