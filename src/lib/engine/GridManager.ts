@@ -8,8 +8,6 @@ export class GridManager {
       throw new Error("Number of columns must be greater than 0");
     }
 
-    return Array.from({ length: rows }, 
-      () => Array.from({ length: columns }, () => false)
-    );
+    return Array.from({ length: rows }, () => Array.from({ length: columns }, () => false));
   }
 }

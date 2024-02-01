@@ -36,7 +36,7 @@ describe("GridManager", () => {
       expect(grid).toStrictEqual([
         [false, false, false],
         [false, false, false],
-        [false, false, false]
+        [false, false, false],
       ]);
     });
 
@@ -45,7 +45,9 @@ describe("GridManager", () => {
     });
 
     it("should throw an error if the number of columns is less than 1", () => {
-      expect(() => gridManager.createGrid(5, 0)).toThrow("Number of columns must be greater than 0");
+      expect(() => gridManager.createGrid(5, 0)).toThrow(
+        "Number of columns must be greater than 0",
+      );
     });
   });
 });
