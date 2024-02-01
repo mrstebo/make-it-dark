@@ -10,8 +10,8 @@ describe("GridManager", () => {
 
   describe("createGrid", () => {
     it("should create a grid with the correct number of rows", () => {
-      const rows = 5;
-      const columns = 5;
+      const rows = 3;
+      const columns = 3;
 
       const grid = gridManager.createGrid(rows, columns);
 
@@ -19,12 +19,25 @@ describe("GridManager", () => {
     });
 
     it("should create a grid with the correct number of columns", () => {
-      const rows = 5;
-      const columns = 5;
+      const rows = 3;
+      const columns = 3;
 
       const grid = gridManager.createGrid(rows, columns);
 
       expect(grid[0].length).toEqual(columns);
+    });
+
+    it("should create a grid with all cells set to false", () => {
+      const rows = 3;
+      const columns = 3;
+
+      const grid = gridManager.createGrid(rows, columns);
+
+      expect(grid).toStrictEqual([
+        [false, false, false],
+        [false, false, false],
+        [false, false, false]
+      ]);
     });
 
     it("should throw an error if the number of rows is less than 1", () => {
