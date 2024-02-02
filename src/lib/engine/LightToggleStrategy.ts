@@ -3,11 +3,11 @@ export class LightToggleStrategy {
     const updatedGrid = grid.map((row) => [...row]);
 
     if (row < 0 || row >= grid.length) {
-        throw new Error(`Row ${row} is out of bounds`);
+      throw new Error(`Row ${row} is out of bounds`);
     }
 
     if (column < 0 || column >= grid[0].length) {
-        throw new Error(`Column ${column} is out of bounds`);
+      throw new Error(`Column ${column} is out of bounds`);
     }
 
     updatedGrid[row][column] = !updatedGrid[row][column];
