@@ -1,4 +1,5 @@
 import { GridManager } from "./GridManager";
+import { GridRandomizer } from "./GridRandomizer";
 import { LightToggleStrategy } from "./LightToggleStrategy";
 import { WinConditionChecker } from "./WinConditionChecker";
 
@@ -10,6 +11,7 @@ export class GameEngine {
     private readonly gridManager: GridManager,
     private readonly lightToggleStrategy: LightToggleStrategy,
     private readonly winConditionChecker: WinConditionChecker,
+    private readonly gridRandomizer: GridRandomizer = new GridRandomizer(),
   ) {}
 
   startGame(): void {
@@ -17,8 +19,8 @@ export class GameEngine {
       throw new Error("Game has already started");
     }
 
-    this.initialGrid = this.gridManager.createGrid(5, 5);
-    this.grid = [...this.initialGrid]
+    this.initialGrid = this.gridRandomizer.randomize(this.gridManager.createGrid(5, 5));
+    this.grid = [...this.initialGrid];
   }
 
   restartGame(): void {
@@ -43,5 +45,9 @@ export class GameEngine {
     }
 
     return this.winConditionChecker.check(this.grid);
+  }
+
+  getGrid(): boolean[][] {
+    return [...this.grid];
   }
 }
