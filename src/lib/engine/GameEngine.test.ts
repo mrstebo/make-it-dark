@@ -17,7 +17,12 @@ describe("GameEngine", () => {
     lightToggleStrategy = new LightToggleStrategy();
     winConditionChecker = new WinConditionChecker();
     gridRandomizer = new GridRandomizer();
-    gameEngine = new GameEngine(gridManager, lightToggleStrategy, winConditionChecker, gridRandomizer);
+    gameEngine = new GameEngine(
+      gridManager,
+      lightToggleStrategy,
+      winConditionChecker,
+      gridRandomizer,
+    );
   });
 
   afterEach(() => {
