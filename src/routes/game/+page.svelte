@@ -35,14 +35,14 @@
     moves = moves + 1;
   }
 
-  setInterval(() => {
-    if (started && !won) {
-      const rows = grid.length;
-      const cols = grid[0].length;
+  // setInterval(() => {
+  //   if (started && !won) {
+  //     const rows = grid.length;
+  //     const cols = grid[0].length;
 
-      toggleLight(Math.floor(Math.random() * rows), Math.floor(Math.random() * cols));
-    }
-  });
+  //     toggleLight(Math.floor(Math.random() * rows), Math.floor(Math.random() * cols));
+  //   }
+  // });
 </script>
 
 <div class="full-height">
@@ -68,15 +68,16 @@
     </section>
   {/if}
 
+  
   {#if started}
     <section class="wrapper special game-section">
       <div class="special">
-          <Game data={grid} onLightPressed={toggleLight} />
-          <p>Moves: {moves}</p>
+        <Game data={grid} onLightPressed={toggleLight} />
+        <p>Moves: {moves}</p>
       </div>
     </section>
   {/if}
-</div>
+  </div>
 
 <style>
   .full-height {
@@ -87,6 +88,11 @@
     display: flex;
     justify-content: center;
     gap: 20px;
+  }
+
+  .actions > button {
+    padding: 0 2em;
+    text-align: center;
   }
 
   .game-section {
