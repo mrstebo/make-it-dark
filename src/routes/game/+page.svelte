@@ -3,7 +3,7 @@
   import { LightToggleStrategy } from "$lib/engine/LightToggleStrategy";
   import { WinConditionChecker } from "$lib/engine/WinConditionChecker";
   import { GameEngine } from "$lib/engine/GameEngine";
-  import Game from "$lib/components/Game.svelte";
+  import GameGrid from "$lib/components/GameGrid.svelte";
 
   const engine = new GameEngine(
     new GridManager(),
@@ -72,7 +72,7 @@
   {#if started}
     <section class="wrapper special game-section">
       <div class="special">
-        <Game data={grid} onLightPressed={toggleLight} />
+        <GameGrid data={grid} onLightPressed={toggleLight} />
         <p>Moves: {moves}</p>
       </div>
     </section>
