@@ -7,6 +7,6 @@
             <li><a href="/game" class="button primary icon solid fa-gamepad">Play</a></li>
         </ul>
     </div>
-    <div class="image phone"><div class="inner"><img src="/images/screen.jpg" alt="" /></div></div>
+    <div class="image phone"><div class="inner"><img src="/images/screen.png" alt="" /></div></div>
 </header>
 
