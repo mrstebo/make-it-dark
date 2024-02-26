@@ -50,7 +50,7 @@ describe("GameEngine", () => {
   });
 
   describe("restartGame", () => {
-    it("should call gridManager.createGrid", () => {
+    it("should not call gridManager.createGrid", () => {
       const createGridSpy = vi.spyOn(gridManager, "createGrid");
 
       gameEngine.startGame();
