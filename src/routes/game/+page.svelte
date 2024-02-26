@@ -19,6 +19,8 @@
     engine.startGame();
     started = true;
     grid = engine.getGrid();
+    won = false;
+    moves = 0;
   }
 
   function restartGame() {
