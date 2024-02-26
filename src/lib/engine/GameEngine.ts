@@ -15,10 +15,6 @@ export class GameEngine {
   ) {}
 
   startGame(): void {
-    if (this.initialGrid.length) {
-      throw new Error("Game has already started");
-    }
-
     this.initialGrid = this.gridRandomizer.randomize(this.gridManager.createGrid(5, 5));
     this.grid = [...this.initialGrid];
   }
